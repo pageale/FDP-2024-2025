@@ -14,7 +14,11 @@ This repository contains the code, workflows and data processing pipelines devel
 
 ## 📬 Contact
 Name: Alessandra Bonilla Salon
+
 Email: alessandra.bonilla@alum.esci.upf.edu
+
 Institution: ESCI-UPF
+
 Year: 2024-2025
+
 
