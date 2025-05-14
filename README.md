@@ -1,6 +1,4 @@
-<p align="right">
-  <img src="img/esci-logo.png" width="100">
-</p>
+<img align="right" width="100" src="img/esci-logo.png" width="100px" />
 
 # MULTI-DIMENSIONAL COMPARISON OF CELL-FREE DNA MOLECULAR SIGNATURES USING SHORT AND LONG READ SEQUENCING TECHNOLOGIES IN CLINICAL APPLICATIONS
 
