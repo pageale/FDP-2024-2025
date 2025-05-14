@@ -1,20 +1,20 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-    echo "Uso: $0 <fastq_folder>"
+    echo "Use: $0 <fastq_folder>"
     exit 1
 fi
 
 GENOME_SIZE=3100000000
-FASTQ_FOLDER="$1"  # Se corrige la variable de entrada
+FASTQ_FOLDER="$1"
 
 if [ ! -d "$FASTQ_FOLDER" ]; then
-    echo "Error: La carpeta '$FASTQ_FOLDER' no existe."
+    echo "Error: Folder '$FASTQ_FOLDER' does not exist."
     exit 1
 fi
 
 if ! ls "$FASTQ_FOLDER"/*_R1.fastq.gz &>/dev/null; then
-    echo "Error: No se encontraron archivos FASTQ en '$FASTQ_FOLDER'"
+    echo "Error: FASTQ files not found in '$FASTQ_FOLDER'"
     exit 1
 fi
 
@@ -24,15 +24,14 @@ mkdir -p "$OUT_DIR"
 
 SEED=42
 
-# Iterar sobre los archivos FASTQ en la carpeta dada
 for r1 in "$FASTQ_FOLDER"/*_R1.fastq.gz; do
-    [ -e "$r1" ] || continue  # Evita errores si la carpeta está vacía
+    [ -e "$r1" ] || continue  # check empty folder
 
     r2="${r1/_R1.fastq.gz/_R2.fastq.gz}"
     SAMPLE=$(basename "$r1" | sed 's/_R1.fastq.gz//')
 
     echo "-------------------------------------------------" | tee -a "$LOG_FILE"
-    echo "Procesando muestra: $SAMPLE" | tee -a "$LOG_FILE"
+    echo "Processing sample: $SAMPLE" | tee -a "$LOG_FILE"
     echo "-------------------------------------------------" | tee -a "$LOG_FILE"
 
     TOTAL_READS=$(zcat "$r1" | wc -l)
@@ -43,11 +42,11 @@ for r1 in "$FASTQ_FOLDER"/*_R1.fastq.gz; do
     INIT_COV=$(echo "scale=5; $TOTAL_BASES / $GENOME_SIZE" | bc -l)
     INIT_COV=$(printf "%.5f" "$INIT_COV")
 
-    echo "Muestra: $SAMPLE" | tee -a "$LOG_FILE"
+    echo "Sample: $SAMPLE" | tee -a "$LOG_FILE"
     echo "Total reads: $TOTAL_READS" | tee -a "$LOG_FILE"
     echo "Read length: $READ_LENGTH" | tee -a "$LOG_FILE"
-    echo "Total bases secuenciadas: $TOTAL_BASES" | tee -a "$LOG_FILE"
-    echo "Cobertura inicial: ${INIT_COV}x" | tee -a "$LOG_FILE"
+    echo "Total sequenced bases: $TOTAL_BASES" | tee -a "$LOG_FILE"
+    echo "Initial coverage: ${INIT_COV}x" | tee -a "$LOG_FILE"
     echo "-------------------------------------------------" | tee -a "$LOG_FILE"
 
     MIN_COV=0.01
@@ -89,11 +88,11 @@ for r1 in "$FASTQ_FOLDER"/*_R1.fastq.gz; do
         NEW_BASES=$((NEW_READS * READ_LENGTH * 2))
         NEW_COV=$(echo "scale=5; $NEW_BASES / $GENOME_SIZE" | bc -l)
 
-        echo "  Reads después de downsampling: $NEW_READS" | tee -a "$LOG_FILE"
-        echo "  Cobertura después de downsampling: ${NEW_COV}x" | tee -a "$LOG_FILE"
+        echo "  Reads after downsampling: $NEW_READS" | tee -a "$LOG_FILE"
+        echo "  Coverage after downsampling: ${NEW_COV}x" | tee -a "$LOG_FILE"
         echo "-------------------------------------------------" | tee -a "$LOG_FILE"
     '
 
-    echo "Downsampling paralelo completo para $SAMPLE."
+    echo "Downsampling completed for $SAMPLE."
 
 done
