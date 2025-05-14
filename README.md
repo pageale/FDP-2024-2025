@@ -1,5 +1,5 @@
 # MULTI-DIMENSIONAL COMPARISON OF CELL-FREE DNA MOLECULAR SIGNATURES USING SHORT AND LONG READ SEQUENCING TECHNOLOGIES IN CLINICAL APPLICATIONS
-[logo]: https://github.com/pageale/FDP-2024-2025/img/esci-logo.png
+<img src="img/esci-logo.png" width="300" />
 
 ## Overview
 
