@@ -13,12 +13,12 @@ This repository contains the code, workflows and data processing pipelines devel
 4. **Copy number analysis:** Here you will find the copy used to generate the statistical analyiss and plots.
 
 ## 📬 Contact
-Name: Alessandra Bonilla Salon
+**Name:** Alessandra Bonilla Salon
 
-Email: alessandra.bonilla@alum.esci.upf.edu
+**Email:** alessandra.bonilla@alum.esci.upf.edu
 
-Institution: ESCI-UPF
+**Institution:** ESCI-UPF
 
-Year: 2024-2025
+**Year:** 2024-2025
 
 
