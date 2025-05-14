@@ -20,7 +20,7 @@ This repository contains the code, workflows and data processing pipelines devel
 4. **Copy number analysis:** Here you will find the copy used to generate the statistical analyiss and plots.
 
 ## 📬 Contact
-**Name:** Alessandra Bonilla Salon
+**Author:** Alessandra Bonilla Salon
 
 **Email:** alessandra.bonilla@alum.esci.upf.edu
 
