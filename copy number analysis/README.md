@@ -95,3 +95,7 @@ This script generates heatmaps of copy number profiles for all samples, comparin
   BiocManager::install(c("ComplexHeatmap", "circlize"))
   ```
 
+## Notes
+* Make sure sample IDs are consistent across all input files and tables.
+* The scripts have been tested with ichorCNA v0.2.0.
+
