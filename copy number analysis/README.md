@@ -3,7 +3,8 @@ This folder contains scripts for processing and analyzing copy number alteration
 
 ## Contents
 * **extract_ichor_info.py:** Extracts summary information from ichorCNA output.
-* **correlation.R** Performs Pearson correlation analysis and generates plots for tumor fraction estimates and CNA bins.
+* **correlation.R:** Performs Pearson correlation analysis and generates plots for tumor fraction estimates and CNA bins.
+* **heatmap_copy_number_illumina-vs-nanopore.R:** Plots heatmaps of copy number profiles for all samples, comparing technologies (Illumina and Nanopore). Optionally adds tumor type annotations. 
 
 ## Usage
 * **extract_ichor_info.py**: This script converts ichorCNA output files into a single summary table containing the following columns for each sample:
@@ -49,7 +50,48 @@ This folder contains scripts for processing and analyzing copy number alteration
     ```R
     install.packages(c("ggpubr", "dplyr", "readr", "ggrepel", "ggplot2", "vctrs", "purrr"))
     ``` 
-***
+_ _ _
 
+* **heatmap_copy_number_illumina-vs-nanopore.R**:
+This script generates heatmaps of copy number profiles for all samples, comparing different sequencing technologies (Illumina vs. Nanopore). There’s also an option to include tumor type annotations.
 
+  **Input:**
+  * *.cna.seg files from ichorCNA.
+  * Optional: A metadata table with tumor types for annotation.
+
+  **Output:** Heatmap plots in PDF, PNG, and JPEG formats.
+
+   **Libraries**:
+    ```R
+  library(readr)
+  library(dplyr)
+  library(tidyr)
+  library(ggplot2)
+  library(scales)
+  library(circlize)
+  library(ComplexHeatmap)
+  library(forcats)
+  library(cowplot)
+  library(magick)
+  library(grid)
+  library(textshape)
+  library(RColorBrewer)
+  library(paletteer)
+  ```
+  **Instalation**
+    
+    You can install the required R packages by running:
+    
+    ```R
+    install.packages(c("readr", "dplyr", "tidyr", "ggplot2", "scales", "forcats", 
+                   "cowplot", "magick", "grid", "textshape", 
+                   "RColorBrewer", "paletteer"))
+    ``` 
+
+  **Note:** Some libraries like ComplexHeatmap, circlize, and karyoploteR might require Bioconductor installation:
+  ```R
+  if (!requireNamespace("BiocManager", quietly = TRUE))
+      install.packages("BiocManager")
+  BiocManager::install(c("ComplexHeatmap", "circlize"))
+  ```
 
