@@ -202,31 +202,6 @@ crear_heatmap_cna(merged_bins_scaled_downsampled, "downsampled_coverage_horizont
 #============================================
 # HEATMAPS ORIGINAL AND DOWNSAMPLED BY TUMOR TYPE
 #============================================
-# Colorectal	IMN259
-# Colorectal	IMN041
-# Neuroendrocrine	IMN072
-# Colorectal	IMN603
-# prostate	IMN4048
-# breast	IMN3952
-# prostate	IMN3852
-# Colorectal	IMN3110
-# prostate	IMN4004
-# Colorectal	IMN3179
-# vater_ampoule	IMN4521
-# cervix	IMN1339
-# urinary_tract	IMN3549
-# Colorectal	IMN4425
-# Gastric	IMN4426
-# Gastric	IMN4405
-# Non-Small Cell Lung Cancer	IMN029
-# liver	IMN3573
-# Melanoma	IMN3469
-# Colorectal	IMN508
-# vater_ampoule	IMN4478
-# Non-Small Cell Lung Cancer	IMN4541
-# Colorectal	IMN1269
-# Neuroendrocrine	IMN083
-
 
 crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_row_names = FALSE) {
   
@@ -266,20 +241,6 @@ crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_r
     )
   
   tech_colors <- c("Illumina" = "#eb9307", "Nanopore" = "#5BB0BA")
-  
-  # tumor_colors <- c(
-  #   "Colorectal" = "#A0C878",
-  #   "Neuroendrocrine" = "#E6F5D0",
-  #   "Prostate" = "#8073AC",
-  #   "Breast" = "#F38C79",
-  #   "Vater Ampoule" = "#276419",
-  #   "Cervix" = "#C2A5CF",
-  #   "Urinary Tract" = "#E3C89B",
-  #   "Gastric" = "#A53860",
-  #   "Non-Small Cell Lung Cancer" = "#FDE0EF",
-  #   "Liver" = "#F1B6DA",
-  #   "Melanoma" = "#DE77AE"
-  # )
   
   tumor_types <- unique(anno_df$tumor_type)
 
