@@ -1,8 +1,14 @@
 # Fragmentomics Analysis
 
 ## Content
-* **bam-nanopore-to-nanoplot.sh:**
-* **bam-to-picard.sh:**
+
+Collecting fragment lenght for:
+**NANOPORE**
+1. **bam-nanopore-to-nanoplot.sh:** This script collects the metrics
+2. **change_format_nanoplot.py:**
+
+**ILLUMINA**
+1. **bam-to-picard.sh:**
 
 ## Usage
 
@@ -17,13 +23,13 @@ parallel
     ./bam-nanopore-to-nanoplot.sh <folder_bam> <output_folder>
     ```
 
-samtools
-picard 
 
 Installation:
 
 ----
 * **bam-to-picard.sh:**
+samtools
+picard 
 
   **Command:**
   
