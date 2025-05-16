@@ -15,11 +15,11 @@ This repository contains the code, workflows and data processing pipelines devel
 
 
 ## Repository Structure
-1. **Data processing:** In this folder, you will find the scripts and pipelines used for the pre-processing of raw data (FASTQ reads for Illumina and uBAM for Nanopore), downsampling and other general codes.
+1. **Data processing:** In this folder, you will find the scripts and pipelines used for the pre-processing of raw data (FASTQ reads for Illumina and uBAM for Nanopore), downsampling and other general use codes.
 3. **Fragment analysis:** This folder contains the code used for the fragment size obtention and files manipulation to generate the plots for fragmentomics comparison.
 4. **Copy number analysis:** Here you will find the copy used to generate the statistical analyiss and plots.
 
-## 📬 Contact
+## Contact
 **Author:** Alessandra Bonilla Salon
 
 **Email:** alessandra.bonilla@alum.esci.upf.edu
