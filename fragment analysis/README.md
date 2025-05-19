@@ -2,7 +2,8 @@
 
 ## Content
 
-Collecting fragment lenght for:
+Collecting fragment length for:
+
 **NANOPORE**
 1. **bam-nanopore-to-nanoplot.sh:** This script collects the metrics
 2. **change_format_nanoplot.py:**
@@ -13,7 +14,7 @@ Collecting fragment lenght for:
 ## Usage
 
 * **bam-nanopore-to-nanoplot.sh:**
-requiremnets:
+requirements:
 NanoPlot
 samtools
 parallel
