@@ -1,0 +1,63 @@
+samples: "config/samples-TFG.tsv" # .tsv file containing sample names and locations
+regions: "config/regions.tsv" # .tsv file containing bed files with regions of interest
+
+## snakemake_GE_analysis
+
+proteinAtlas: "Tissue" #RNAtable name ["Blood", "Tissue", "Extended"]
+# tissues for generating plots, valid tissues labels can be found in respective label files for the used protein atlas
+tissue: ["adipose_tissue", "adrenal_gland", "amygdala", "appendix",
+ "B_cells", "basal_ganglia", "bone_marrow", "breast", "cerebellum",
+  "cerebral_cortex", "cervix_uterine", "colon", "corpus_callosum",
+   "dendritic_cells", "ductus_deferens", "duodenum", "endometrium", 
+   "epididymis", "esophagus", "fallopian_tube", "gallbladder", "granulocytes",
+    "heart_muscle", "hippocampal_formation", "hypothalamus", "kidney", "liver", 
+    "lung", "lymph_node", "midbrain", "monocytes", "NK_cells", "olfactory_region", 
+    "ovary", "pancreas", "parathyroid_gland", "pituitary_gland", "placenta", 
+    "pons_and_medulla", "prostate", "rectum", "retina", "salivary_gland", 
+    "seminal_vesicle", "skeletal_muscle", "skin", "small_intestine", 
+    "smooth_muscle", "spinal_cord", "spleen", "stomach", "T_cells", "testis", 
+    "thalamus", "thymus", "thyroid_gland", "tongue", "tonsil", "total_PBMC", 
+    "urinary_bladder", "vagina"]
+
+
+ # tissues for generating plots, see respective
+refSample: ["IMN072", "IMN3852"]
+
+minRL: 120 # minimum read length for calculating WPS
+maxRL: 180 # maximum read length for calculating WPS
+bpProtection: 120 
+
+### genome build specific options ##
+
+GRCh37:
+  genome: "resources/genome/hg19.fa.genome" #full .genome file
+  genome_autosomes: "resources/genome/hg19.fa.genome.regular_autosomes" # .genome file reduced to regular autosomes
+  UCSC_gap: "resources/blacklists/UCSC/UCSC_gap.hg19.bed" # UCSC_gap file in .bed format
+  universal_blacklist: "resources/blacklists/universal_blacklist.hg19.bed" # UCSC_gap + ENCODE blacklist combined file in .bed format
+  transcriptAnno: "resources/annotations/transcriptAnno-GRCh37.103.tsv.gz" # file containing TSSs
+
+GRCh38:
+  genome: "resources/genome/hg38.fa.genome" #full .genome file
+  genome_autosomes: "resources/genome/hg38.fa.genome.regular_autosomes" #.genome file reduced to regular autosome
+  UCSC_gap: "resources/blacklists/UCSC/UCSC_gap.hg38.bed" # UCSC_gap file in .bed format
+  universal_blacklist: "resources/blacklists/universal_blacklist.hg38.bed" # UCSC_gap + ENCODE blacklist combined file in .bed format
+  transcriptAnno: "resources/annotations/transcriptAnno-GRCh38.103.tsv.gz" # file containing TSSs
+
+### WPS
+
+plotting:
+  overlay_mode: "mean" # can be either mean, median, or confidence
+  smoothing: True # bool; apply Savitzky-Golay filter or not
+  rolling: True # bool; smooth by substracting the rolling median
+  background_norm: True # bool, normalize with random background or not
+
+
+## unsupervised 
+
+unsupervised:
+  frequencies: [[120,280],[160,200],[190,200]] # defines FFT frequencies used for unsupervised methods
+  kmeans:
+    n_clusters: [2,3,4] # number of clusters to try
+  UMAP:
+    n_components: [10,15,20,25,30] # number of components to reduce to
+
