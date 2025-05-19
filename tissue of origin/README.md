@@ -30,11 +30,29 @@
 
 
 ## Usage
+* **snakefile_WPS.smk:**
+
+  **Input**
+  - configured by the user ([samples.tsv](config/samples.tsv)):
+      - analysis ID
+      - samples
+      - path to sample .bam files
+      - reference samples fro plotting
+      - genome build per sample
+  - configured by the user ([regions.tsv](config/regions.tsv)):
+      - bed file containing regions of interest (e.g. TFBS), all having the same length
+  **Output**
+  - table containing bp specific WPS for regions listed in bed
+  - line plot showing normalized WPS of multiple samples
+
+  
+---
+
 * **snakefile_GE_analysis.smk:**
 
   **Input**
   
-  - included in the repository:
+  - included in the [original repository](https://github.com/kircherlab/cfDNA?tab=readme-ov-file):
       - annotations
       - labels
       - RNAtable from Protein Atlas 
