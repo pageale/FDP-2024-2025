@@ -2,9 +2,9 @@ import pandas as pd
 import glob
 from pathlib import Path
 
-nanoplot_info_path = "/home/alessandra/Projects/FDP/fragment_distribution/nanoplot_nanopore/nanopore_downsampled_mapped/nanoplot/*/"
+nanoplot_info_path = "/path/to/folder/output/nanoplot/*/"
 file_list = glob.glob(nanoplot_info_path + "/*.tsv.gz")
-output_path = "/home/alessandra/Projects/FDP/fragment_distribution/samples_similar_cov/nanopore/"
+output_path = "/path/to/outdir/"
 
 
 for f in file_list:
