@@ -40,7 +40,7 @@ rank_and_top10 <- function(df, sample_order, palette_name, n_top = 10) {
   top10 <- ranked %>%
     filter(sample_id == sample_order[1]) %>%
     arrange(rank) %>%
-    slice(1:n_top) %>%
+    dplyr::slice(1:n_top) %>%
     pull(tissue)
   
   color_palette <- paletteer::paletteer_d(palette_name, n = n_top)
@@ -105,11 +105,15 @@ plot_ranking <- function(ranked_df, top10, my_colors, title_text, sample_order) 
         trans = ~.,
         breaks = 1:n_tissues,
         labels = ranked_df %>%
-          filter(sample_id == sample_order[2]) %>%
+          filter(sample_id == sample_order[length(sample_order)]) %>%
           arrange(rank) %>%
           pull(tissue)
       )
-    )
+    ) +
+      theme(
+        axis.text.y = element_text(size = 12),
+        axis.text.y.right = element_text(size = 12)
+      )
   }
   
   return(p)
