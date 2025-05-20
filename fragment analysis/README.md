@@ -58,64 +58,32 @@ Collecting fragment length for:
 ----
 * **bam-to-picard.sh:**
 
-🔸 bam-to-picard.sh
-Inputs:
+  **Inputs:** Folder containing BAM files (aligned and sorted).
+  
+  **Outputs:**
+  
+  * Filtered BAM files.
+  
+  * *.txt files with insert size metrics per sample.
+  
+  * *.pdf histograms of fragment length distributions.
 
-Folder containing BAM files (aligned and sorted).
-
-Outputs:
-
-Filtered BAM files.
-
-*.txt files with insert size metrics per sample.
-
-*.pdf histograms of fragment length distributions.
-
-Requirements:
-
-Picard
-
-samtools
-
-Command:
-
-bash
-Copy
-Edit
-./bam-to-picard.sh <folder_bam> <output_folder>
-Installation Example:
-
-bash
-Copy
-Edit
-conda install -c bioconda picard samtools
-# or
-conda install -c bioconda/label/cf201901 picar
-
-    **Requirements:**
-    * samtools
-    * picard 
-
-  **Input:**
-  * Folder with BAM files.
-<input_tsv.gz> <output_file>
-  **Output:**
-  * Folder with filtered BAMs.
-  * *.txt (insert sizes per sample).
-  * *.pdf (histogram of fragment distributions per sample).
+  **Requirements:**
+   * Picard
+   * samtools
 
   **Command:**
-  
-  ```sh
-  ./bam-to-picard.sh <folder_bam> <output_folder>
-  ```
-  
+
+   ```bash
+   ./bam-to-picard.sh <folder_bam> <output_folder>
+   ```
+
   **Installation:**
   
   ```sh
   conda install bioconda::picard
   # or
   conda install bioconda/label/cf201901::picard
-
+  conda install -c bioconda samtools
   ```
 
