@@ -10,7 +10,7 @@ Collecting fragment length for:
 3. **change_format_nanoplot.py:** Formats the .tsv.gz output from NanoPlot into a cleaner and reduced size format compatible with downstream analyses.
 
 **ILLUMINA**
-1. **bam-to-picard.sh:** Filters BAM files (keeping mapped reads with MAPQ ≥ 20), then uses Picard CollectInsertSizeMetrics to extract insert size metrics and generate insert size histograms.
+1. **bam-to-picard.sh:** Filters BAM files (keeping mapped reads with MAPQ ≥ 20), then uses *Picard CollectInsertSizeMetrics* to extract insert size metrics and generate insert size histograms.
 
 ## Usage
 
