@@ -173,7 +173,7 @@ This folder contains all scripts and workflows used for data preprocessing and m
   
   ```bash
   chmod +x long-reads-concatenate_and_downsampling.sh
-  ./long-reads-concatenate_and_downsampling.sh <fastq_folder>"
+  ./long-reads-concatenate_and_downsampling.sh <fastq_folder>
   ```
 
 ## Notes
