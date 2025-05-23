@@ -4,6 +4,7 @@ This folder contains all scripts and workflows used for data preprocessing and m
 ## Contents
 
 1. **Illumina pre-processing:** This section includes a [Nextflow](https://www.nextflow.io/docs/latest/install.html) workflow for preprocessing paired-end Illumina FASTQ files (R1 and R2).
+
    **Workflow Steps:**
       * Adapter trimming (Cutadapt)
       * Alignment to reference genome (BWA)
@@ -119,16 +120,16 @@ This folder contains all scripts and workflows used for data preprocessing and m
   chmod +x calculate_coverage.sh
   ./calculate_coverage.sh
   ```
-
+  
 ***
 * **illumina-reads_downsampling_for_folder.sh:**
   
   **Input:**
-  * Folder with FASTQ paired-end
+  * Folder with paired-end FASTQ files
  
   **Output:**
-   * **illumina_fastq_downsampling-2.txt:** Log file. 
-   * **illumina_fastq_downsampling/:** Folder containig all the FASTQ downsmpled at diferent coverages.
+   * illumina_fastq_downsampling-2.txt (log file)
+   * llumina_fastq_downsampling/ (downsampled FASTQ files at different coverages)
 
   **Requirements:**
   * seqtk
@@ -136,7 +137,7 @@ This folder contains all scripts and workflows used for data preprocessing and m
     
   **Installation:**
    ```bash
-    conda install bioconda::seqtk
+    conda install -c bioconda seqtk parallel
    ```
 
   **Command:**
@@ -151,19 +152,21 @@ This folder contains all scripts and workflows used for data preprocessing and m
 * **long-reads-concatenate_and_downsampling.sh:**
   
   **Input:**
-  * Folder with barcoded FASTQ divided into their respective folder (output from sequencer). 
+  * Folder with barcode-organized Nanopore FASTQ files.
  
   **Output:**
-   * **downsampling_nanopore_picard_log.txt:** Log file. 
-   * **downsampling_nanopore_second_run/:** Output directory containig all the FASTQ downsmpled at diferent coverages.
+  
+   * downsampling_nanopore_picard_log.txt (log file)
+   * downsampling_nanopore_second_run/ (downsampled FASTQ files at different coverages)
 
   **Requirements:**
   * seqtk
   * GNU parallel
    
   **Installation:**
+  
    ```bash
-    conda install bioconda::seqtk
+    conda install -c bioconda seqtk parallel
    ```
 
   **Command:**
@@ -173,6 +176,11 @@ This folder contains all scripts and workflows used for data preprocessing and m
   ./long-reads-concatenate_and_downsampling.sh <fastq_folder>"
   ```
 
+## Notes
+
+* Ensure all reference genomes are indexed and have corresponding .fai and .dict files.
+* Use consistent genome builds between preprocessing and downstream analysis.
+* Recommended to run workflows within Conda or Docker environments for reproducibility.
 
 
 
