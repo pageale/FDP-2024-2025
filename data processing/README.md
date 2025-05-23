@@ -133,8 +133,8 @@ This folder contains all the scripts and workflows used for data preprocessing a
   **Command:**
   
   ```bash
-  chmod +x illumina-reads_downsampling_for_folder.sh
-  ./illumina-reads_downsampling_for_folder.sh <fastq_folder>"
+  chmod +x long-reads-concatenate_and_downsampling.sh
+  ./long-reads-concatenate_and_downsampling.sh <fastq_folder>"
   ```
 
 
