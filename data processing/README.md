@@ -14,11 +14,12 @@ This folder contains all the scripts and workflows used for data preprocessing a
 5. **Other scripts:**
     * **calculate_coverage.sh:** THis sctipt calculates the coverage of the BAM files. It looks for all the .bam extension and then calculate the coverage in parallel for multiples samples. 
     * **illumina-reads_downsampling_for_folder.sh:** This script perfroms downsampling from the fastq (R1 and R2). FIrst it computes sit initial raw coverage (no pre-processing), then it creates a list with differnet cov values (from inital to 0.1x in steps of 0.1 and then from 0.1x to 0.01x in steps of 0.01), and finally, it does the subsampling for both reads using seqtk. 
-    * **long-reads-concatenate_and_downsampling.sh:** This performs downsampling for long-read data. 
+    * **long-reads-concatenate_and_downsampling.sh:** This performs downsampling for long-read data. It rewceieves as input a folder with one directory for each barcode of fastq (direct output from the sequencer). First, it merges all the fastq into one per barcode, then it calculates the initial raw coverage, create the list with differnet cov values (from inital to 0.1x in steps of 0.1 and then from 0.1x to 0.01x in steps of 0.01), and finally, it does the subsampling in parallel. 
 
 
 ## Usage
 * **illumina_preprocessing-and-ichor.nf:**
+  
   **Input:**
 
   **Output:**
@@ -40,6 +41,7 @@ This folder contains all the scripts and workflows used for data preprocessing a
   
 ***
 * **nanopore_preprocessing-and-ichor.nf:**
+  
   **Input:**
   + config file
  
@@ -62,22 +64,79 @@ This folder contains all the scripts and workflows used for data preprocessing a
 <fastq_folder>
 
 ***
-* **illumina_preprocessing-and-ichor.nf:**
+* **calculate_coverage.sh:**
+  
   **Input:**
-
+  * BAM files
+ 
   **Output:**
-
+   * a .txt with all the samples names and its respective coverage
 
   **Requirements:**
-  * Edit config file: write input, output, and path to local reference genome (.fa, .fai, .dict).
-  * nextflow version 22.10.0.5826
-  * Docker version 26.1.3
-  * Docker image
+  * samtools
     
   **Installation:**
   
   **Command:**
   
   ```bash
-  nextflow run illumina_preprocessing-and-ichor.nf
+  chmod +x calculate_coverage.sh
+  ./calculate_coverage.sh
   ```
+
+***
+* **illumina-reads_downsampling_for_folder.sh:**
+  
+  **Input:**
+  * Folder with FASTQ paired-end
+ 
+  **Output:**
+   * **illumina_fastq_downsampling-2.txt:** Log file. 
+   * **illumina_fastq_downsampling/:** Folder containig all the FASTQ downsmpled at diferent coverages.
+
+  **Requirements:**
+  * seqtk
+  * GNU parallel
+    
+  **Installation:**
+   ```bash
+    conda install bioconda::seqtk
+   ```
+
+  **Command:**
+  
+  ```bash
+  chmod +x illumina-reads_downsampling_for_folder.sh
+  ./illumina-reads_downsampling_for_folder.sh <fastq_folder>"
+  ```
+
+***
+
+* **long-reads-concatenate_and_downsampling.sh:**
+  
+  **Input:**
+  * Folder with barcoded FASTQ divided into their respective folder (output from sequencer). 
+ 
+  **Output:**
+   * **downsampling_nanopore_picard_log.txt:** Log file. 
+   * **downsampling_nanopore_second_run/:** Output directory containig all the FASTQ downsmpled at diferent coverages.
+
+  **Requirements:**
+  * seqtk
+  * GNU parallel
+   
+  **Installation:**
+   ```bash
+    conda install bioconda::seqtk
+   ```
+
+  **Command:**
+  
+  ```bash
+  chmod +x illumina-reads_downsampling_for_folder.sh
+  ./illumina-reads_downsampling_for_folder.sh <fastq_folder>"
+  ```
+
+
+
+
