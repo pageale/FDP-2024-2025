@@ -93,23 +93,26 @@ This folder contains all scripts and workflows used for data preprocessing and m
   ```bash
   nextflow run illumina_nanopore_preprocessing-and-ichor.nf
   ```
-  
-<fastq_folder>
 
 ***
 * **calculate_coverage.sh:**
   
   **Input:**
-  * BAM files
+  * Folder with BAM files
  
   **Output:**
-   * a .txt with all the samples names and its respective coverage
+   * Text file with sample names and coverage values
+
 
   **Requirements:**
   * samtools
     
   **Installation:**
-  
+
+  ```bash
+  conda install -c bioconda samtools
+  ```
+
   **Command:**
   
   ```bash
