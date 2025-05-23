@@ -1,34 +1,67 @@
 # Data Processing
-This folder contains all the scripts and workflows used for data preprocessing and other data manipulation.
+This folder contains all scripts and workflows used for data preprocessing and manipulation for both Illumina and Nanopore sequencing data.
 
 ## Contents
 
-1. **Illumina pre-processing:** In this folder you will find the Nextflow workflow por data pre-preprocessing for illumina paired-end reads fastq (R1 and R2). It does the trimming (CutAdapt), alignment (bwa), indexing (samtools), marking duplicates (Picard), creating the wig files hmm_readCounter), and finally, the copy number analysis (ichorCNA). It receives as input a fastq folder and gives as output each file corresponding to the processes mentioned previously.
-    * **illumina_preprocessing-and-ichor.nf:** Workflow with all the steps.
-    * **nextflow.config:** Config file where you add the reference genome (.fa), point to input and output folder, and other parameters tuning needed for the workflow.
-      
-3. **Nanopore pre-processing:** In this folder, you will find the Nextflow workflow for data pre-processing for nanopore long reads (single end). The steps include alignment to the reference genome (using a epi2me-labs workflow), creating the wig files (hmm_readCounter), performing the copy number analysis (ichorCNA), and finally it summarize the tumor fraction (and other parameters) from all samples into a table for easy accesibility. 
-    * **nanopore_preprocessing-and-ichor.nf:** This is the nextflow workflow that receives as input a folder with uBAM (direct output from PromethION sequencer) organized into different folders by barcode. As output, it gives the corresponding file from each process. 
-    * **nextflow.config:** Config file that contains the input and output path, the name of the final table, path to reference genome, and other parameters tuning for the correct use of the workflow.
-      
-5. **Other scripts:**
-    * **calculate_coverage.sh:** THis sctipt calculates the coverage of the BAM files. It looks for all the .bam extension and then calculate the coverage in parallel for multiples samples. 
-    * **illumina-reads_downsampling_for_folder.sh:** This script perfroms downsampling from the fastq (R1 and R2). FIrst it computes sit initial raw coverage (no pre-processing), then it creates a list with differnet cov values (from inital to 0.1x in steps of 0.1 and then from 0.1x to 0.01x in steps of 0.01), and finally, it does the subsampling for both reads using seqtk. 
-    * **long-reads-concatenate_and_downsampling.sh:** This performs downsampling for long-read data. It rewceieves as input a folder with one directory for each barcode of fastq (direct output from the sequencer). First, it merges all the fastq into one per barcode, then it calculates the initial raw coverage, create the list with differnet cov values (from inital to 0.1x in steps of 0.1 and then from 0.1x to 0.01x in steps of 0.01), and finally, it does the subsampling in parallel. 
+1. **Illumina pre-processing:** This section includes a [Nextflow](https://www.nextflow.io/docs/latest/install.html) workflow for preprocessing paired-end Illumina FASTQ files (R1 and R2).
+   **Workflow Steps:**
+      * Adapter trimming (Cutadapt)
+      * Alignment to reference genome (BWA)
+      * BAM indexing (Samtools)
+      * Marking duplicates (Picard)
+      * Wig file creation (hmm_readCounter)
+      * Copy number analysis (ichorCNA)
 
+
+   **Files:**
+      * **illumina_preprocessing-and-ichor.nf:**  Main Nextflow workflow.
+      * **nextflow.config:** Configuration file to specify paths for reference genomes, input/output directories, and parameter settings.
+
+3. **Nanopore pre-processing:** This section contains a [Nextflow](https://www.nextflow.io/docs/latest/install.html) workflow for preprocessing Nanopore long-read (single-end) data.
+
+   **Workflow Steps:**
+     * Alignment to the reference genome (epi2me-labs/wf-alignment)
+     * Wig file generation (hmm_readCounter)
+     * Copy number analysis (ichorCNA)
+     * Summarizing tumor fraction and other ichorCNA outputs into a single results table.
+
+   **Files:**
+     * **nanopore_preprocessing-and-ichor.nf:** Main Nextflow workflow.
+     * **nextflow.config:** Configuration file for paths to inputs, outputs, reference genomes, and final summary table.
+      
+5. **Utility Scripts:**
+    * **calculate_coverage.sh:** Calculates coverage for all BAM files in a folder in parallel, producing a text file with sample names and respective coverage values.
+
+    * **illumina-reads_downsampling_for_folder.sh:** Downsamples Illumina FASTQ paired-end reads.
+
+        **Steps:**
+
+         * Calculate initial raw coverage.
+         * Create a list of target coverages (from initial to 0.1x in 0.1x steps, then from 0.1x to 0.01x in 0.01x steps).
+         * Perform parallel downsampling using seqtk.
+
+    * **long-reads-concatenate_and_downsampling.sh:** 
+
+       For Nanopore data:
+        * long-reads-concatenate_and_downsampling.sh – For Nanopore data:
+        * Concatenates all FASTQ files within each barcode directory.
+        * Calculates initial raw coverage.
+        * Creates a list of target coverages (as above).
+        * Performs parallel downsampling with seqtk.
 
 ## Usage
 * **illumina_preprocessing-and-ichor.nf:**
   
   **Input:**
+   * FASTQ paired-end reads folder
+   * Edited nextflow.config specifying input/output paths and reference genome (.fa, .fai, .dict)
 
   **Output:**
-
+   * Processed trimmed FASTQ, BAM, wig, ichorCNA results.
 
   **Requirements:**
-  * Edit config file: write input, output, and path to local reference genome (.fa, .fai, .dict).
-  * nextflow version 22.10.0.5826
-  * Docker version 26.1.3
+  * Nextflow v22.10.0.5826
+  * Docker v26.1.3
   * Docker image
     
   **Installation:**
@@ -38,20 +71,20 @@ This folder contains all the scripts and workflows used for data preprocessing a
   ```bash
   nextflow run illumina_preprocessing-and-ichor.nf
   ```
-  
+
 ***
 * **nanopore_preprocessing-and-ichor.nf:**
   
   **Input:**
-  + config file
+  + Folder with uBAM files organized by barcode
+  * Edited nextflow.config
  
   **Output:**
-  * all the files correpsondung to each step (.bam, .bai, .wig, ichor folder)
+  * Processed BAM, wig, ichorCNA results, and final summary table
 
   **Requirements:**
-  * Edit config file: write input, output, name of the table and path to local reference genome (.fa, .fai, .dict).
-  * nextflow version 22.10.0.5826 or above. 
-  * Install epi2me-labs/wf-alignment, hmm_readCounter, ichorcna
+  * Nextflow v22.10.0.5826 or higher
+  * Install epi2me-labs/wf-alignment, hmm_readCounter, ichorCNA.
 
   **Installation:**
   
