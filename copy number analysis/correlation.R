@@ -44,9 +44,18 @@ plot_tf_correlation <- function(data, xvar, yvar, labelvar, title, out_file, lab
     geom_text_repel(size = label_size, max.overlaps = max_overlaps, na.rm = TRUE) +
     stat_cor(method = "pearson", size = 6, label.x = min(data[[xvar]]), label.y = max(data[[yvar]])) +
     theme_classic() +
-    labs(x = "Tumor Fraction - ichorCNA (Illumina)", y = "Tumor Fraction - ichorCNA (Nanopore)", title = title)
+    theme(
+      axis.title = element_text(size = 16),
+      axis.text = element_text(size = 16),
+      plot.title = element_text(size = 16, hjust = 0.5),
+      legend.text = element_text(size = 16),
+      legend.title = element_text(size = 16)
+    ) +
+    labs(x = "Tumor Fraction - ichorCNA (Illumina)", 
+         y = "Tumor Fraction - ichorCNA (Nanopore)", 
+         title = title)
   
-  ggsave(p, filename = out_file, dpi = 600, width = 6, height = 6)
+  ggsave(p, filename = out_file, dpi = 600)
   print(p)
 }
 
