@@ -22,6 +22,8 @@ This repository contains the code, workflows and data processing pipelines devel
 1. **Data processing:** In this folder, you will find the scripts and pipelines used for the pre-processing of raw data (FASTQ reads for Illumina and uBAM for Nanopore), downsampling and other general use codes.
 3. **Fragment analysis:** This folder contains the code used for the fragment size obtention and files manipulation to generate the plots for fragmentomics comparison.
 4. **Copy number analysis:** Here you will find the copy used to generate the statistical analyiss and plots.
+5. **Tissue of origin:** Contains the adapted workflows for analysisg the tissue of origin, also the scripts for plotting the figures presented in the main manuscript.
+6. **Methylation:** Contains the scripts for extracting the methylation information from the BAM files and the script for plotting.
 
 ## Contact
 **Author:** Alessandra Bonilla Salon
