@@ -137,7 +137,9 @@ crear_heatmap_cna <- function(merged_bins_scaled, output_name, show_row_names = 
   
   ## split columns by chr
   chr_labels <- gsub(":.*$", "", colnames(heatmap_matrix))
-  col_split <- factor(chr_labels, levels = unique(chr_labels))
+  chrs <- gsub('chr', '', chr_labels)
+  colnames(heatmap_matrix) <- chrs
+  col_split <- factor(chrs, levels = unique(chrs))
   
   ## split rows by sample ID
   samples <- gsub("_(Illumina|Nanopore)$", "", rownames(heatmap_matrix))
@@ -159,29 +161,17 @@ crear_heatmap_cna <- function(merged_bins_scaled, output_name, show_row_names = 
     row_names_side = "left",
     left_annotation = row_anno,
     row_title = NULL,
-    heatmap_legend_param = list(direction = "horizontal")
+    heatmap_legend_param = list(direction = "horizontal", labels_gp = gpar(fontsize = 13))
   )
   
-  ## karyoplot
-  png("karyo.png", width=1550, height=150)
-  kp <- plotKaryotype(plot.type=5, chromosomes=c("chr1", "chr2", "chr3",
-                                                 "chr4", "chr5", "chr6", "chr7", "chr8", 
-                                                 "chr9", "chr10", "chr11", "chr12", "chr13", 
-                                                 "chr14", "chr15", "chr16", "chr17", "chr18", 
-                                                 "chr19", "chr20", "chr21", "chr22", "chrX"))
-  dev.off()
   
-  karyo_image <- image_read("karyo.png")
   ht_grob <- grid.grabExpr(draw(ht, 
                                 heatmap_legend_side = "bottom", 
                                 annotation_legend_side = "bottom"))
   
   final_plot <- plot_grid(
-    ggdraw() + draw_image(karyo_image),
     ggdraw() + draw_grob(ht_grob),
-    ncol = 1,
-    rel_heights = c(0.12, 1)
-  )
+    ncol = 1)
   
   print(final_plot)
   
@@ -202,6 +192,31 @@ crear_heatmap_cna(merged_bins_scaled_downsampled, "downsampled_coverage_horizont
 #============================================
 # HEATMAPS ORIGINAL AND DOWNSAMPLED BY TUMOR TYPE
 #============================================
+# Colorectal	IMN259
+# Colorectal	IMN041
+# Neuroendrocrine	IMN072
+# Colorectal	IMN603
+# prostate	IMN4048
+# breast	IMN3952
+# prostate	IMN3852
+# Colorectal	IMN3110
+# prostate	IMN4004
+# Colorectal	IMN3179
+# vater_ampoule	IMN4521
+# cervix	IMN1339
+# urinary_tract	IMN3549
+# Colorectal	IMN4425
+# Gastric	IMN4426
+# Gastric	IMN4405
+# Non-Small Cell Lung Cancer	IMN029
+# liver	IMN3573
+# Melanoma	IMN3469
+# Colorectal	IMN508
+# vater_ampoule	IMN4478
+# Non-Small Cell Lung Cancer	IMN4541
+# Colorectal	IMN1269
+# Neuroendrocrine	IMN083
+
 
 crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_row_names = FALSE) {
   
@@ -242,6 +257,20 @@ crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_r
   
   tech_colors <- c("Illumina" = "#eb9307", "Nanopore" = "#5BB0BA")
   
+  # tumor_colors <- c(
+  #   "Colorectal" = "#A0C878",
+  #   "Neuroendrocrine" = "#E6F5D0",
+  #   "Prostate" = "#8073AC",
+  #   "Breast" = "#F38C79",
+  #   "Vater Ampoule" = "#276419",
+  #   "Cervix" = "#C2A5CF",
+  #   "Urinary Tract" = "#E3C89B",
+  #   "Gastric" = "#A53860",
+  #   "Non-Small Cell Lung Cancer" = "#FDE0EF",
+  #   "Liver" = "#F1B6DA",
+  #   "Melanoma" = "#DE77AE"
+  # )
+  
   tumor_types <- unique(anno_df$tumor_type)
 
   tumor_colors <- setNames(
@@ -267,7 +296,9 @@ crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_r
   
   ## split columns by chr
   chr_labels <- gsub(":.*$", "", colnames(heatmap_matrix))
-  col_split <- factor(chr_labels, levels = unique(chr_labels))
+  chrs <- gsub('chr', '', chr_labels)
+  colnames(heatmap_matrix) <- chrs
+  col_split <- factor(chrs, levels = unique(chrs))
   
   ## split rows by sample ID
   samples <- gsub("_(Illumina|Nanopore)$", "", rownames(heatmap_matrix))
@@ -286,29 +317,19 @@ crear_heatmap_cna_tumor_type <- function(merged_bins_scaled, output_name, show_r
     show_column_names = FALSE,
     show_row_names = show_row_names,
     row_names_gp = gpar(fontsize = 7),
-    column_title_gp = gpar(fontsize = 7),
+    column_title_gp = gpar(fontsize = 15),
     row_names_side = "left",
     left_annotation = row_anno,
     row_title = NULL,
     heatmap_legend_param = list(direction = "horizontal")
   )
   
-  ## karyoplot
-  png("karyo.png", width=1550, height=150)
-  kp <- plotKaryotype(plot.type=5, chromosomes=c("chr1", "chr2", "chr3",
-                                                 "chr4", "chr5", "chr6", "chr7", "chr8", 
-                                                 "chr9", "chr10", "chr11", "chr12", "chr13", 
-                                                 "chr14", "chr15", "chr16", "chr17", "chr18", 
-                                                 "chr19", "chr20", "chr21", "chr22", "chrX"))
-  dev.off()
-  
-  karyo_image <- image_read("karyo.png")
+
   ht_grob <- grid.grabExpr(draw(ht, 
                                 heatmap_legend_side = "right", 
                                 annotation_legend_side = "right"))
   
   final_plot <- plot_grid(
-    ggdraw() + draw_image(karyo_image),
     ggdraw() + draw_grob(ht_grob),
     ncol = 1,
     rel_heights = c(0.12, 1)
