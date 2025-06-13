@@ -24,6 +24,7 @@ This repository contains the code, workflows and data processing pipelines devel
 4. **Copy number analysis:** Here you will find the copy used to generate the statistical analyiss and plots.
 5. **Tissue of origin:** Contains the adapted workflows for analysisg the tissue of origin, also the scripts for plotting the figures presented in the main manuscript.
 6. **Methylation:** Contains the scripts for extracting the methylation information from the BAM files and the script for plotting.
+7. **Supplementary Material.** You can find the all teh supplementary material (PDF) mentioned in the main manuscirpt.
 
 ## Contact
 **Author:** Alessandra Bonilla Salon
