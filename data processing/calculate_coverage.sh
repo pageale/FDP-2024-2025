@@ -11,4 +11,4 @@ calc_coverage() {
 
 export -f calc_coverage
 
-find . -name "*.bam" | parallel -j 10 calc_coverage > bam_coverage_all.txt
+find . -name "*.bam" | parallel --citation -j 10 calc_coverage > bam_coverage_all.txt
