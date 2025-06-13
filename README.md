@@ -33,24 +33,13 @@ This repository contains the code, workflows, and data processing pipelines deve
 ---
 
 ## Repository Structure
-├── data_processing/
-│ └── Scripts and pipelines for preprocessing raw data (FASTQ for Illumina, uBAM for Nanopore), downsampling, and other utilities.
-│
-├── fragment_analysis/
-│ └── Scripts for obtaining fragment size profiles and generating fragmentomics comparison plots.
-│
-├── copy_number_analysis/
-│ └── Code for performing copy number alteration analyses and generating related plots.
-│
-├── tissue_of_origin/
-│ └── Adapted workflows for tissue-of-origin analysis and scripts for figure generation.
-│
-├── methylation/
-│ └── Scripts for methylation extraction from BAM files and downstream visualization.
-│
-├── supplementary_material/
-│ └── PDF files containing supplementary material referenced in the manuscript.
 
+1. **Data processing:** Scripts and pipelines for preprocessing raw data (FASTQ for Illumina, uBAM for Nanopore), downsampling, and other utilities.
+3. **Fragment analysis:** Scripts for obtaining fragment size profiles and generating fragmentomics comparison plots.
+4. **Copy number analysis:** Code for performing copy number alteration analyses and generating related plots.
+5. **Tissue of origin:** Adapted workflows for tissue-of-origin analysis and scripts for figure generation.
+6. **Methylation:** Scripts for methylation extraction from BAM files and downstream visualization.
+7. **Supplementary Material.** PDF files containing supplementary material referenced in the manuscript.
 
 ---
 
