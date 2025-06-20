@@ -39,7 +39,7 @@ This repository contains the code, workflows, and data processing pipelines deve
 4. **Copy number analysis:** Code for performing copy number alteration analyses and generating related plots.
 5. **Tissue of origin:** Adapted workflows for tissue-of-origin analysis and scripts for figure generation.
 6. **Methylation:** Scripts for methylation extraction from BAM files and downstream visualization.
-7. **Supplementary Material.** PDF files containing supplementary material referenced in the manuscript.
+7. **Supplementary Material:** PDF files containing supplementary material referenced in the manuscript.
 
 ---
 
